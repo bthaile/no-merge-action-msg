@@ -13,13 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check for @nocommit
-      uses: itsvs/no-merge-action@releases/v0.2
+      uses: bthaile/no-merge-action@releases/v0.1
       with:
         github-token: ${{github.token}}
         keyword: "@nocommit"
 ```
 
 The `keyword` variable is the string that we don't want the PR to include.
+The `message` variable is the error string that will be displayed in the PR.
 
 ## Contributing
 

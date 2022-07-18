@@ -1,12 +1,13 @@
 import * as core from '@actions/core'
-const {GitHub, context} = require('@actions/github')
+const { GitHub, context } = require('@actions/github')
 const parse = require('parse-diff')
 
 async function run() {
   try {
-    const token = core.getInput('github-token', {required: true})
+    const token = core.getInput('github-token', { required: true })
     const github = new GitHub(token, {})
     const keyword = core.getInput('keyword')
+    const message = core.getInput('message')
 
     const diff_url = context.payload.pull_request.diff_url
     const result = await github.request(diff_url)
@@ -26,7 +27,7 @@ async function run() {
     }
 
     if (changes.indexOf(keyword) >= 0) {
-      core.setFailed(`The code contains ${keyword}`)
+      core.setFailed(message || `The code contains ${keyword}`)
     }
   } catch (error) {
     core.setFailed(error.message)
