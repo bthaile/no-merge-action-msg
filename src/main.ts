@@ -1,10 +1,10 @@
 import * as core from '@actions/core'
-const { GitHub, context } = require('@actions/github')
+const {GitHub, context} = require('@actions/github')
 const parse = require('parse-diff')
 
 async function run() {
   try {
-    const token = core.getInput('github-token', { required: true })
+    const token = core.getInput('github-token', {required: true})
     const github = new GitHub(token, {})
     const keyword = core.getInput('keyword')
     const message = core.getInput('message')
