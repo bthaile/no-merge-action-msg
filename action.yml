@@ -13,5 +13,5 @@ inputs:
     description: 'Message to emit if the keyword is found in the PR code'
     
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'lib/main.js'
