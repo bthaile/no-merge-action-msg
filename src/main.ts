@@ -7,8 +7,11 @@ async function run() {
     const keyword = core.getInput('keyword')
     const message = core.getInput('message')
 
+    const myToken = core.getInput('github-token')
+    const octokit = github.getOctokit(myToken)
+
     const diff_url = github.context.payload.pull_request.diff_url
-    const result = await github.request(diff_url)
+    const result = await octokit.rest.pulls.get(diff_url)
     const files = parse(result.data)
     core.exportVariable('files', files)
     core.setOutput('files', files)
