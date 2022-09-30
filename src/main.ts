@@ -18,6 +18,10 @@ async function run() {
 
     let changes = ''
     for (const file of files) {
+      core.setOutput(
+        `${keyword} file compare: ${file}`,
+        file.to.indexOf(keyword)
+      )
       if (file.to.indexOf(keyword) >= 0) {
         core.setFailed(message || `The code contains ${keyword}`)
       }
