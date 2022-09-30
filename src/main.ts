@@ -18,6 +18,9 @@ async function run() {
 
     let changes = ''
     for (const file of files) {
+      if (file.to.indexOf(keyword) >= 0) {
+        core.setFailed(message || `The code contains ${keyword}`)
+      }
       for (const chunk of file.chunks) {
         for (const change of chunk.changes) {
           if (change.add) {
