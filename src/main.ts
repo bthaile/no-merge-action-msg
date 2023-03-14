@@ -14,14 +14,10 @@ async function run() {
     const result = await octokit.rest.pulls.get(diff_url)
     const files = parse(result.data)
     core.exportVariable('files', files)
-    core.setOutput('files', files)
 
     let changes = ''
     for (const file of files) {
-      core.setOutput(
-        `${keyword} file compare: ${file}`,
-        file.to.indexOf(keyword)
-      )
+      core.info(`${keyword} file compare: ${file} ${file.to.indexOf(keyword)}`)
       if (file.to.indexOf(keyword) >= 0) {
         core.setFailed(message || `The code contains ${keyword}`)
       }
@@ -38,7 +34,7 @@ async function run() {
       core.setFailed(message || `The code contains ${keyword}`)
     }
   } catch (error) {
-    core.setFailed(error.message)
+    core.setFailed(error)
   }
 }
 
